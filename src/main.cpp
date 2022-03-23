@@ -11,6 +11,7 @@
 // ---- END VEXCODE CONFIGURED DEVICES ----
 
 #include "vex.h"
+#include "../lvgl-master/lvgl.h"
 
 using namespace vex;
 
@@ -33,8 +34,9 @@ void pre_auton(void) {
   // Initializing Robot Configuration. DO NOT REMOVE!
   vexcodeInit();
 
-  // All activities that occur before the competition starts
-  // Example: clearing encoders, setting servo positions, ...
+  // call lv_tick_inc(x) every x milliseconds for internal timing of LVGL
+  float currentTicTime = Brain.Timer.value();
+  lv_tick_inc(5);
 }
 
 /*---------------------------------------------------------------------------*/
@@ -66,10 +68,6 @@ void autonomous(void) {
 void usercontrol(void) {
   // User control code here, inside the loop
   while (1) {
-    // This is the main execution loop for the user control program.
-    // Each time through the loop your program should update motor + servo
-    // values based on feedback from the joysticks.
-
     // ........................................................................
     // Insert user code here. This is where you use the joystick values to
     // update your motors, etc.
@@ -95,4 +93,6 @@ int main() {
   while (true) {
     wait(100, msec);
   }
+
+  return 0;
 }
