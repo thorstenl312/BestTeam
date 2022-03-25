@@ -11,7 +11,8 @@
 // ---- END VEXCODE CONFIGURED DEVICES ----
 
 #include "vex.h"
-#include "../lvgl-master/lvgl.h"
+#include "GUI_initialize.h"
+#include "GUI_initialize.cpp"
 
 using namespace vex;
 
@@ -33,10 +34,6 @@ competition Competition;
 void pre_auton(void) {
   // Initializing Robot Configuration. DO NOT REMOVE!
   vexcodeInit();
-
-  // call lv_tick_inc(x) every x milliseconds for internal timing of LVGL
-  float currentTicTime = Brain.Timer.value();
-  lv_tick_inc(5);
 }
 
 /*---------------------------------------------------------------------------*/
@@ -68,10 +65,7 @@ void autonomous(void) {
 void usercontrol(void) {
   // User control code here, inside the loop
   while (1) {
-    // ........................................................................
-    // Insert user code here. This is where you use the joystick values to
-    // update your motors, etc.
-    // ........................................................................
+    //
 
     wait(20, msec); // Sleep the task for a short amount of time to
                     // prevent wasted resources.
@@ -90,8 +84,90 @@ int main() {
   pre_auton();
 
   // Prevent main from exiting with an infinite loop.
+  int current_page = 1;
+  int autoSelect = 4;
+
+  // Print start up screen
+  print_page(current_page, autoSelect);
+
+  Brain.Timer.reset();
+
   while (true) {
-    wait(100, msec);
+    // GUI page controlls
+    int xPress = Brain.Screen.xPosition();
+    int yPress = Brain.Screen.yPosition();
+
+    if (current_page == 2){
+      /*
+      Brain.Screen.setCursor(3, 4);
+      Brain.Screen.print("LDB: %.3f", Left_Drive_Bot.current());
+      Brain.Screen.setCursor(4, 4);
+      Brain.Screen.print("LDT: %.3f", Left_Drive_Top.current());
+      Brain.Screen.setCursor(5, 4);
+      Brain.Screen.print("RDB: %.3f", Right_Drive_Bot.current());
+      Brain.Screen.setCursor(6, 4);
+      Brain.Screen.print("RDT: %.3f", Right_Drive_Top.current());
+      Brain.Screen.setCursor(8, 4);
+      Brain.Screen.print("FTOP: %.3f", Front_Top.current());
+      Brain.Screen.setCursor(9, 4);
+      Brain.Screen.print("FBOT: %.3f", Front_Bot.current());
+      Brain.Screen.setCursor(10, 4);
+      Brain.Screen.print("BTOP: %.3f", Back_Top.current());
+      Brain.Screen.setCursor(11, 4);
+      Brain.Screen.print("BBOT: %.3f", Back_Bot.current());
+      Brain.Screen.setCursor(10, 31);
+      Brain.Screen.print("INR: %.3f", In_Right.current());
+      Brain.Screen.setCursor(11, 31);
+      Brain.Screen.print("INL: %.3f", In_Left.current());
+      */
+    }
+
+    //check if brain is being pressed
+    if (Brain.Screen.pressing()){
+      while(Brain.Screen.pressing()){}
+      // page shifting
+      if((xPress >= 10 && xPress <= 130) && (yPress >= 10 && yPress <= 40)){
+        // Go to page one
+        current_page = 0;
+        print_page(current_page, autoSelect);
+      }
+      else if((xPress >= 180 && xPress <= 300) && (yPress >= 10 && yPress <= 40)){
+        // Go to page two
+        current_page = 1;
+        print_page(current_page, autoSelect);
+      }
+      else if((xPress >= 360 && xPress <= 480) && (yPress >= 10 && yPress <= 40)){
+        // Go to page three
+        current_page = 2;
+        print_page(current_page, autoSelect);
+      }
+
+      //auto selection
+      if(current_page == 1){
+        if((xPress >= 35 && xPress <= 159) && (yPress >= 45 && yPress <= 110)){
+          autoSelect = 1; //red1
+          print_page(current_page, autoSelect);
+        }
+        else if((xPress >= 35 && xPress <= 159) && (yPress >= 135 && yPress <= 200)){
+          autoSelect = 2; //red2
+          print_page(current_page, autoSelect);
+        }
+        else if((xPress >= 179 && xPress <= 303) && (yPress >= 45 && yPress <= 200)){
+          autoSelect = 3; //skills
+          print_page(current_page, autoSelect);
+        }
+        else if((xPress >= 323 && xPress <= 447) && (yPress >= 45 && yPress <= 110)){
+          autoSelect = 4; //blue1
+          print_page(current_page, autoSelect);
+        }
+        else if((xPress >= 323 && xPress <= 447) && (yPress >= 135 && yPress <= 200)){
+          autoSelect = 5; //blue2
+          print_page(current_page, autoSelect);
+        }
+      }
+    }
+
+    wait(5, msec);
   }
 
   return 0;
