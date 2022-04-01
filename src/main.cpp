@@ -11,7 +11,7 @@
 // ---- END VEXCODE CONFIGURED DEVICES ----
 
 #include "vex.h"
-
+#include "motion.h"
 using namespace vex;
 
 // A global instance of competition
@@ -65,6 +65,13 @@ void autonomous(void) {
 
 void usercontrol(void) {
   // User control code here, inside the loop
+  moveForward(700, 40);
+  wait(3000,msec);
+  moveBackward(700, 40);
+  wait(3000, msec);
+  turnLeft(700, 40);
+  wait(3000, msec);
+  turnRight(700, 40);
   while (1) {
     // This is the main execution loop for the user control program.
     // Each time through the loop your program should update motor + servo
