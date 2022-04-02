@@ -4,15 +4,18 @@
 void print_page(int page, int autoSelect){
   //Brain GUI print settings
   Brain.Screen.setPenColor(white);
-  if(autoSelect <= 2){
-    Brain.Screen.setFillColor(red);
+  if (autoSelect == 1){
+    Brain.Screen.setFillColor(yellow);
+  }
+  else if (autoSelect == 2){
+    // skills
+    Brain.Screen.setFillColor(blue);
   }
   else if (autoSelect == 3){
-    // skills
-    Brain.Screen.setFillColor(purple);
+    Brain.Screen.setFillColor(red);
   }
-  else{
-    Brain.Screen.setFillColor(blue);
+  else if (autoSelect == 4) {
+    Brain.Screen.setFillColor(purple);
   }
 
   Brain.Screen.drawRectangle(0,0, 485, 245);  //boarder showing what color you are
@@ -22,10 +25,11 @@ void print_page(int page, int autoSelect){
   // print page 1 screen
   if(page == 0){
     Brain.Screen.setFillColor(green);
-    Brain.Screen.printAt(15,25, "Information"); //button print
+    Brain.Screen.printAt(15,25, "Vitals"); //button print
     Brain.Screen.setFillColor(transparent);
-    Brain.Screen.printAt(185,25, "Auton Select"); //button print
-    Brain.Screen.printAt(365,25, "Test Runs"); //button print
+    Brain.Screen.printAt(100,25, "Auton Select"); //button print
+    Brain.Screen.printAt(260,25, "Test Runs"); //button print
+    Brain.Screen.printAt(380,25, "Controls"); //button print
 
     // print the sensor info
     Brain.Screen.setCursor(3, 4);
@@ -49,76 +53,173 @@ void print_page(int page, int autoSelect){
     Brain.Screen.setCursor(3, 31);
     Brain.Screen.print("Battery lvl: %d%s", Brain.Battery.capacity(pct), "%%");
     Brain.Screen.setCursor(5, 31);
-    if(autoSelect == 1){Brain.Screen.print("Auto: RED1");}
-    if(autoSelect == 2){Brain.Screen.print("Auto: RED2");}
-    if(autoSelect == 3){Brain.Screen.print("Auto: Skills");}
-    if(autoSelect == 4){Brain.Screen.print("Auto: BLUE1");}
-    if(autoSelect == 5){Brain.Screen.print("Auto: BLUE2");}
+    if(autoSelect == 1){Brain.Screen.print("Auto: Forward");}
+    if(autoSelect == 2){Brain.Screen.print("Auto: T-Left");}
+    if(autoSelect == 3){Brain.Screen.print("Auto: Backward");}
+    if(autoSelect == 4){Brain.Screen.print("Auto: T-Right");}
   }
   else if(page == 1){
     Brain.Screen.setFillColor(transparent);
-    Brain.Screen.printAt(15,25, "Information"); //button print
+    Brain.Screen.printAt(15,25, "Vitals"); //button print
     Brain.Screen.setFillColor(green);
-    Brain.Screen.printAt(185,25, "Auton Select"); //button print
+    Brain.Screen.printAt(100,25, "Auton Select"); //button print
     Brain.Screen.setFillColor(transparent);
-    Brain.Screen.printAt(365,25, "Test Runs"); //button print
+    Brain.Screen.printAt(260,25, "Test Runs"); //button print
+    Brain.Screen.printAt(380,25, "Controls"); //button print
 
     // print auto buttons
     if(autoSelect == 1){
       Brain.Screen.setFillColor(green); Brain.Screen.drawRectangle(35, 45, 124, 65);
-      Brain.Screen.setFillColor(red); Brain.Screen.drawRectangle(35, 135, 124, 65);
-      Brain.Screen.setFillColor(black); Brain.Screen.drawRectangle(179, 45, 124, 155);
-      Brain.Screen.setFillColor(blue); Brain.Screen.drawRectangle(323, 45, 124, 65);
-      Brain.Screen.setFillColor(blue); Brain.Screen.drawRectangle(323, 135, 124, 65);
+      Brain.Screen.setFillColor(blue); Brain.Screen.drawRectangle(35, 135, 124, 65);
+      Brain.Screen.setFillColor(red); Brain.Screen.drawRectangle(179, 45, 124, 65);
+      Brain.Screen.setFillColor(purple); Brain.Screen.drawRectangle(179, 135, 124, 65);
+      Brain.Screen.setFillColor(transparent);
+      Brain.Screen.setCursor(4, 33);
+      Brain.Screen.print("Speed: %.1f", 100.0);
+      Brain.Screen.setCursor(9, 33);
+      Brain.Screen.print("Distance: ");
     }
     else if(autoSelect == 2){
-      Brain.Screen.setFillColor(red); Brain.Screen.drawRectangle(35, 45, 124, 65);
+      Brain.Screen.setFillColor(yellow); Brain.Screen.drawRectangle(35, 45, 124, 65);
       Brain.Screen.setFillColor(green); Brain.Screen.drawRectangle(35, 135, 124, 65);
-      Brain.Screen.setFillColor(black); Brain.Screen.drawRectangle(179, 45, 124, 155);
-      Brain.Screen.setFillColor(blue); Brain.Screen.drawRectangle(323, 45, 124, 65);
-      Brain.Screen.setFillColor(blue); Brain.Screen.drawRectangle(323, 135, 124, 65);
+      Brain.Screen.setFillColor(red); Brain.Screen.drawRectangle(179, 45, 124, 65);
+      Brain.Screen.setFillColor(purple); Brain.Screen.drawRectangle(179, 135, 124, 65);
+      Brain.Screen.setFillColor(transparent);
+      Brain.Screen.setCursor(4, 33);
+      Brain.Screen.print("Speed: %.1f", 0.0);
+      Brain.Screen.setCursor(9, 33);
+      Brain.Screen.print("Distance: ");
     }
     else if(autoSelect == 3){
-      Brain.Screen.setFillColor(red); Brain.Screen.drawRectangle(35, 45, 124, 65);
-      Brain.Screen.setFillColor(red); Brain.Screen.drawRectangle(35, 135, 124, 65);
-      Brain.Screen.setFillColor(green); Brain.Screen.drawRectangle(179, 45, 124, 155);
-      Brain.Screen.setFillColor(blue); Brain.Screen.drawRectangle(323, 45, 124, 65);
-      Brain.Screen.setFillColor(blue); Brain.Screen.drawRectangle(323, 135, 124, 65);
+      Brain.Screen.setFillColor(yellow); Brain.Screen.drawRectangle(35, 45, 124, 65);
+      Brain.Screen.setFillColor(blue); Brain.Screen.drawRectangle(35, 135, 124, 65);
+      Brain.Screen.setFillColor(green); Brain.Screen.drawRectangle(179, 45, 124, 65);
+      Brain.Screen.setFillColor(purple); Brain.Screen.drawRectangle(179, 135, 124, 65);
+      Brain.Screen.setFillColor(transparent);
+      Brain.Screen.setCursor(4, 33);
+      Brain.Screen.print("Speed: %.1f", 50.0);
+      Brain.Screen.setCursor(9, 33);
+      Brain.Screen.print("Distance: ");
     }
     else if(autoSelect == 4){
-      Brain.Screen.setFillColor(red); Brain.Screen.drawRectangle(35, 45, 124, 65);
-      Brain.Screen.setFillColor(red); Brain.Screen.drawRectangle(35, 135, 124, 65);
-      Brain.Screen.setFillColor(black); Brain.Screen.drawRectangle(179, 45, 124, 155);
-      Brain.Screen.setFillColor(green); Brain.Screen.drawRectangle(323, 45, 124, 65);
-      Brain.Screen.setFillColor(blue); Brain.Screen.drawRectangle(323, 135, 124, 65);
+      Brain.Screen.setFillColor(yellow); Brain.Screen.drawRectangle(35, 45, 124, 65);
+      Brain.Screen.setFillColor(blue); Brain.Screen.drawRectangle(35, 135, 124, 65);
+      Brain.Screen.setFillColor(red); Brain.Screen.drawRectangle(179, 45, 124, 65);
+      Brain.Screen.setFillColor(green); Brain.Screen.drawRectangle(179, 135, 124, 65);
+      Brain.Screen.setFillColor(transparent);
+      Brain.Screen.setCursor(4, 33);
+      Brain.Screen.print("Speed: %.1f", 0.0);
+      Brain.Screen.setCursor(9, 33);
+      Brain.Screen.print("Distance: ");
     }
-    else if(autoSelect == 5){
-      Brain.Screen.setFillColor(red); Brain.Screen.drawRectangle(35, 45, 124, 65);
-      Brain.Screen.setFillColor(red); Brain.Screen.drawRectangle(35, 135, 124, 65);
-      Brain.Screen.setFillColor(black); Brain.Screen.drawRectangle(179, 45, 124, 155);
-      Brain.Screen.setFillColor(blue); Brain.Screen.drawRectangle(323, 45, 124, 65);
-      Brain.Screen.setFillColor(green); Brain.Screen.drawRectangle(323, 135, 124, 65);
-    }
-
+    
     Brain.Screen.setFillColor(transparent);
-    Brain.Screen.printAt(77, 80, "RED1"); Brain.Screen.printAt(77, 170, "RED2"); Brain.Screen.printAt(214, 125, "Skills"); Brain.Screen.printAt(360, 80, "BLUE1"); Brain.Screen.printAt(360, 170, "BLUE2");
+    Brain.Screen.printAt(60, 80, "Forward"); Brain.Screen.printAt(65, 170, "T-Left"); Brain.Screen.printAt(202, 80, "Backward"); Brain.Screen.printAt(206, 170, "T-Right");
   }
   else if(page == 2){
     Brain.Screen.setFillColor(transparent);
-    Brain.Screen.printAt(15,25, "Information"); //button print
-    Brain.Screen.printAt(185,25, "Auton Select"); //button print
+    Brain.Screen.printAt(15,25, "Vitals"); //button print
+    Brain.Screen.printAt(100,25, "Auton Select"); //button print
     Brain.Screen.setFillColor(green);
-    Brain.Screen.printAt(365,25, "Test Runs"); //button print
+    Brain.Screen.printAt(260,25, "Test Runs"); //button print
     Brain.Screen.setFillColor(transparent);
+    Brain.Screen.printAt(380,25, "Controls"); //button print
 
     // print the general info
     Brain.Screen.setCursor(3, 31);
     Brain.Screen.print("Battery lvl: %d%s", Brain.Battery.capacity(pct), "%%");
     Brain.Screen.setCursor(5, 31);
-    if(autoSelect == 1){Brain.Screen.print("Auto: RED1");}
-    if(autoSelect == 2){Brain.Screen.print("Auto: RED2");}
-    if(autoSelect == 3){Brain.Screen.print("Auto: Skills");}
-    if(autoSelect == 4){Brain.Screen.print("Auto: BLUE1");}
-    if(autoSelect == 5){Brain.Screen.print("Auto: BLUE2");}
+    if(autoSelect == 1){Brain.Screen.print("Auto: Forward");}
+    if(autoSelect == 2){Brain.Screen.print("Auto: T-Left");}
+    if(autoSelect == 3){Brain.Screen.print("Auto: Backward");}
+    if(autoSelect == 4){Brain.Screen.print("Auto: T-Right");}
+  }
+  else if(page == 3){
+    Brain.Screen.setFillColor(transparent);
+    Brain.Screen.printAt(15,25, "Vitals"); //button print
+    Brain.Screen.printAt(100,25, "Auton Select"); //button print
+    Brain.Screen.printAt(260,25, "Test Runs"); //button print
+    Brain.Screen.setFillColor(green);
+    Brain.Screen.printAt(380,25, "Controls"); //button print
+    Brain.Screen.setFillColor(transparent);
+    Brain.Screen.setFillColor(red); Brain.Screen.drawCircle(355, 70, 35);
+    Brain.Screen.setFillColor(red); Brain.Screen.drawCircle(290, 130, 35);
+    Brain.Screen.setFillColor(red); Brain.Screen.drawCircle(420, 130, 35);
+    Brain.Screen.setFillColor(red); Brain.Screen.drawCircle(355, 190, 35);
+
+    Brain.Screen.setCursor(3, 4);
+    Brain.Screen.setFillColor(transparent);
+    Brain.Screen.print("Movement:");
+    Brain.Screen.setCursor(4, 4);
+    Brain.Screen.print("Speed:");
+    Brain.Screen.setCursor(5, 4);
+    Brain.Screen.print("Traverse:");
+    Brain.Screen.setCursor(11, 4);
+    Brain.Screen.print("Battery lvl: %d%s", Brain.Battery.capacity(pct), "%%");
+
+    if(autoSelect == 6){
+      Brain.Screen.setFillColor(green); Brain.Screen.drawCircle(355, 70, 35);
+    Brain.Screen.setFillColor(red); Brain.Screen.drawCircle(290, 130, 35);
+    Brain.Screen.setFillColor(red); Brain.Screen.drawCircle(420, 130, 35);
+    Brain.Screen.setFillColor(red); Brain.Screen.drawCircle(355, 190, 35);
+
+    Brain.Screen.setCursor(3, 4);
+    Brain.Screen.setFillColor(transparent);
+    Brain.Screen.print("Movement: Forwards");
+    Brain.Screen.setCursor(4, 4);
+    Brain.Screen.print("Speed: %.1f units/s", 100.0);
+    Brain.Screen.setCursor(5, 4);
+    Brain.Screen.print("Traverse: %.1f degrees", 0.0);
+    Brain.Screen.setCursor(11, 4);
+    Brain.Screen.print("Battery lvl: %d%s", Brain.Battery.capacity(pct), "%%");
+    }
+    else if(autoSelect == 7){
+      Brain.Screen.setFillColor(red); Brain.Screen.drawCircle(355, 70, 35);
+    Brain.Screen.setFillColor(green); Brain.Screen.drawCircle(290, 130, 35);
+    Brain.Screen.setFillColor(red); Brain.Screen.drawCircle(420, 130, 35);
+    Brain.Screen.setFillColor(red); Brain.Screen.drawCircle(355, 190, 35);
+
+    Brain.Screen.setCursor(3, 4);
+    Brain.Screen.setFillColor(transparent);
+    Brain.Screen.print("Movement: Turn Left");
+    Brain.Screen.setCursor(4, 4);
+    Brain.Screen.print("Speed: %.1f units/s", 0.0);
+    Brain.Screen.setCursor(5, 4);
+    Brain.Screen.print("Traverse: %.1f degrees", -15.0);
+    Brain.Screen.setCursor(11, 4);
+    Brain.Screen.print("Battery lvl: %d%s", Brain.Battery.capacity(pct), "%%");
+    }
+    else if(autoSelect == 8){
+      Brain.Screen.setFillColor(red); Brain.Screen.drawCircle(355, 70, 35);
+    Brain.Screen.setFillColor(red); Brain.Screen.drawCircle(290, 130, 35);
+    Brain.Screen.setFillColor(green); Brain.Screen.drawCircle(420, 130, 35);
+    Brain.Screen.setFillColor(red); Brain.Screen.drawCircle(355, 190, 35);
+
+    Brain.Screen.setCursor(3, 4);
+    Brain.Screen.setFillColor(transparent);
+    Brain.Screen.print("Movement: Turn Right");
+    Brain.Screen.setCursor(4, 4);
+    Brain.Screen.print("Speed: %.1f units/s", 0.0);
+    Brain.Screen.setCursor(5, 4);
+    Brain.Screen.print("Traverse: %.1f degrees", 15.0);
+    Brain.Screen.setCursor(11, 4);
+    Brain.Screen.print("Battery lvl: %d%s", Brain.Battery.capacity(pct), "%%");
+    }
+    else if(autoSelect == 9){
+      Brain.Screen.setFillColor(red); Brain.Screen.drawCircle(355, 70, 35);
+    Brain.Screen.setFillColor(red); Brain.Screen.drawCircle(290, 130, 35);
+    Brain.Screen.setFillColor(red); Brain.Screen.drawCircle(420, 130, 35);
+    Brain.Screen.setFillColor(green); Brain.Screen.drawCircle(355, 190, 35);
+
+    Brain.Screen.setCursor(3, 4);
+    Brain.Screen.setFillColor(transparent);
+    Brain.Screen.print("Movement: Backwards");
+    Brain.Screen.setCursor(4, 4);
+    Brain.Screen.print("Speed: %.1f units/s", -25.0);
+    Brain.Screen.setCursor(5, 4);
+    Brain.Screen.print("Traverse: %.1f degrees", 0.0);
+    Brain.Screen.setCursor(11, 4);
+    Brain.Screen.print("Battery lvl: %d%s", Brain.Battery.capacity(pct), "%%");
+    }
   }
 }

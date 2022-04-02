@@ -72,8 +72,26 @@ void usercontrol(void) {
   }
 }
 
+bool autonSel(int select)
+{
+  bool sel = false;
+  int currentSel = select;
+  if (currentSel >= 0 && currentSel < 5)
+      sel = true;
+  return sel;
+}
+
+bool control(int controlRes)
+{
+  bool con = false;
+  int currentControl = controlRes;
+  if (currentControl > 5 && currentControl < 10)
+      con = true;
+  return con;
+}
+
 //
-// Main will set up the competition functions and callbacks.
+// Main will set up the functions and callbacks.
 //
 int main() {
   // Set up callbacks for autonomous and driver control periods.
@@ -85,7 +103,7 @@ int main() {
 
   // Prevent main from exiting with an infinite loop.
   int current_page = 1;
-  int autoSelect = 4;
+  int autoSelect = 3;
 
   // Print start up screen
   print_page(current_page, autoSelect);
@@ -98,30 +116,32 @@ int main() {
     int yPress = Brain.Screen.yPosition();
 
     if (current_page == 2){
-      /*
+      
       Brain.Screen.setCursor(3, 4);
-      Brain.Screen.print("LDB: %.3f", Left_Drive_Bot.current());
+      Brain.Screen.print("LDB: %.3f");
       Brain.Screen.setCursor(4, 4);
-      Brain.Screen.print("LDT: %.3f", Left_Drive_Top.current());
+      Brain.Screen.print("LDT: %.3f");
       Brain.Screen.setCursor(5, 4);
-      Brain.Screen.print("RDB: %.3f", Right_Drive_Bot.current());
+      Brain.Screen.print("RDB: %.3f");
       Brain.Screen.setCursor(6, 4);
-      Brain.Screen.print("RDT: %.3f", Right_Drive_Top.current());
+      Brain.Screen.print("RDT: %.3f");
       Brain.Screen.setCursor(8, 4);
-      Brain.Screen.print("FTOP: %.3f", Front_Top.current());
+      Brain.Screen.print("FTOP: %.3f");
       Brain.Screen.setCursor(9, 4);
-      Brain.Screen.print("FBOT: %.3f", Front_Bot.current());
+      Brain.Screen.print("FBOT: %.3f");
       Brain.Screen.setCursor(10, 4);
-      Brain.Screen.print("BTOP: %.3f", Back_Top.current());
+      Brain.Screen.print("BTOP: %.3f");
       Brain.Screen.setCursor(11, 4);
-      Brain.Screen.print("BBOT: %.3f", Back_Bot.current());
+      Brain.Screen.print("BBOT: %.3f");
       Brain.Screen.setCursor(10, 31);
-      Brain.Screen.print("INR: %.3f", In_Right.current());
+      Brain.Screen.print("INR: %.3f");
       Brain.Screen.setCursor(11, 31);
-      Brain.Screen.print("INL: %.3f", In_Left.current());
-      */
+      Brain.Screen.print("INL: %.3f");
+      
     }
 
+    bool testAuto = false;
+    bool testControl = false;
     //check if brain is being pressed
     if (Brain.Screen.pressing()){
       while(Brain.Screen.pressing()){}
@@ -131,14 +151,19 @@ int main() {
         current_page = 0;
         print_page(current_page, autoSelect);
       }
-      else if((xPress >= 180 && xPress <= 300) && (yPress >= 10 && yPress <= 40)){
+      else if((xPress >= 100 && xPress <= 240) && (yPress >= 10 && yPress <= 40)){
         // Go to page two
         current_page = 1;
         print_page(current_page, autoSelect);
       }
-      else if((xPress >= 360 && xPress <= 480) && (yPress >= 10 && yPress <= 40)){
+      else if((xPress >= 270 && xPress <= 370) && (yPress >= 10 && yPress <= 40)){
         // Go to page three
         current_page = 2;
+        print_page(current_page, autoSelect);
+      }
+      else if((xPress >= 380 && xPress <= 470) && (yPress >= 10 && yPress <= 40)){
+        // Go to page four
+        current_page = 3;
         print_page(current_page, autoSelect);
       }
 
@@ -146,23 +171,56 @@ int main() {
       if(current_page == 1){
         if((xPress >= 35 && xPress <= 159) && (yPress >= 45 && yPress <= 110)){
           autoSelect = 1; //red1
-          print_page(current_page, autoSelect);
+          testAuto = autonSel(autoSelect);
+          if(testAuto)
+          {
+            print_page(current_page, autoSelect);
+          }
         }
         else if((xPress >= 35 && xPress <= 159) && (yPress >= 135 && yPress <= 200)){
           autoSelect = 2; //red2
           print_page(current_page, autoSelect);
         }
-        else if((xPress >= 179 && xPress <= 303) && (yPress >= 45 && yPress <= 200)){
+        else if((xPress >= 179 && xPress <= 303) && (yPress >= 45 && yPress <= 110)){
           autoSelect = 3; //skills
           print_page(current_page, autoSelect);
         }
-        else if((xPress >= 323 && xPress <= 447) && (yPress >= 45 && yPress <= 110)){
+        else if((xPress >= 179 && xPress <= 303) && (yPress >= 135 && yPress <= 200)){
           autoSelect = 4; //blue1
+          testAuto = autonSel(autoSelect);
+          if(testAuto)
+          {
+            print_page(current_page, autoSelect);
+          }
+        }
+        
+      }
+
+      //Control
+      if(current_page == 3){
+        if((xPress >= 320 && xPress <= 390) && (yPress >= 35 && yPress <= 105)){
+          autoSelect = 6; //Forwards
+          testControl = control(autoSelect);
+          if(testControl)
+          {
+            print_page(current_page, autoSelect);
+          }
+        }
+        else if((xPress >= 255 && xPress <= 325) && (yPress >= 95 && yPress <= 165)){
+          autoSelect = 7; //Left
           print_page(current_page, autoSelect);
         }
-        else if((xPress >= 323 && xPress <= 447) && (yPress >= 135 && yPress <= 200)){
-          autoSelect = 5; //blue2
+        else if((xPress >= 385 && xPress <= 455) && (yPress >= 95 && yPress <= 165)){
+          autoSelect = 8; //Right
           print_page(current_page, autoSelect);
+        }
+        else if((xPress >= 320 && xPress <= 390) && (yPress >= 155 && yPress <= 225)){
+          autoSelect = 9; //Backwards
+          testControl = control(autoSelect);
+          if(testControl)
+          {
+            print_page(current_page, autoSelect);
+          }
         }
       }
     }
