@@ -12,6 +12,7 @@
 
 #include "vex.h"
 #include "motion.h"
+#include <iostream>
 using namespace vex;
 
 // A global instance of competition
@@ -65,13 +66,22 @@ void autonomous(void) {
 
 void usercontrol(void) {
   // User control code here, inside the loop
-  moveForward(700, 40);
-  wait(3000,msec);
-  moveBackward(700, 40);
-  wait(3000, msec);
-  turnLeft(700, 40);
-  wait(3000, msec);
-  turnRight(700, 40);
+  std::cout << moveForward(700, 40) << std::endl; //Should move and print true
+  std::cout << moveForward(-700, 40) << std::endl; //Should not move and print false
+  std::cout << moveForward(700, -40) << std::endl; //Should not move and print false
+
+  std::cout << moveBackward(700, 40) << std::endl; //Should move and print true
+  std::cout << moveBackward(-700, 40) << std::endl; //Should not move and print false
+  std::cout << moveBackward(700, -40) << std::endl; //Should not move and print false;
+
+  std::cout << turnLeft(700, 40) << std::endl; //Should move and print true
+  std::cout << turnLeft(-700, 40) << std::endl; //Should not move and print false
+  std::cout << turnLeft(700, -40) << std::endl; //Should not move and print false
+
+  std::cout << turnRight(700, 40) << std::endl; //Should move and print true
+  std::cout << turnRight(-700, 40) << std::endl; //Should not move and print false
+  std::cout << turnRight(700, -40) << std::endl; //Should not move and print false
+
   while (1) {
     // This is the main execution loop for the user control program.
     // Each time through the loop your program should update motor + servo

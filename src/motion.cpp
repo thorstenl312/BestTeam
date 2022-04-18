@@ -1,17 +1,33 @@
 #include "motion.h"
-void moveForward(int pos, int speed){
-  leftDrive.rotateFor(pos, deg, speed, velocityUnits::pct, false);
-  rightDrive.rotateFor(pos, deg, speed, velocityUnits::pct, true);
+bool moveForward(int pos, int speed){
+  if(pos > 0 || speed > 0){
+    leftDrive.rotateFor(pos, deg, speed, velocityUnits::pct, false);
+    rightDrive.rotateFor(pos, deg, speed, velocityUnits::pct, true);
+    return true;
+  }
+  return false;
 }
-void moveBackward(int pos, int speed){
-  leftDrive.rotateFor(-pos, deg, speed, velocityUnits::pct, false);
-  rightDrive.rotateFor(-pos, deg, speed, velocityUnits::pct, true);
+bool moveBackward(int pos, int speed){
+  if(pos > 0 || speed > 0){
+    leftDrive.rotateFor(-pos, deg, speed, velocityUnits::pct, false);
+    rightDrive.rotateFor(-pos, deg, speed, velocityUnits::pct, true);
+    return true;
+  }
+  return false;
 }
-void turnLeft(int pos, int speed){
-  leftDrive.rotateFor(-pos, deg, speed, velocityUnits::pct, false);
-  rightDrive.rotateFor(pos, deg, speed, velocityUnits::pct, true);
+bool turnLeft(int pos, int speed){
+  if(pos > 0 || speed > 0){
+    leftDrive.rotateFor(-pos, deg, speed, velocityUnits::pct, false);
+    rightDrive.rotateFor(pos, deg, speed, velocityUnits::pct, true);
+    return true;
+  }
+  return false;
 }
-void turnRight(int pos, int speed){
-  leftDrive.rotateFor(pos, deg, speed, velocityUnits::pct, false);
-  rightDrive.rotateFor(-pos, deg, speed, velocityUnits::pct, true);
+bool turnRight(int pos, int speed){
+  if(pos > 0 || speed > 0){
+    leftDrive.rotateFor(pos, deg, speed, velocityUnits::pct, false);
+    rightDrive.rotateFor(-pos, deg, speed, velocityUnits::pct, true);
+    return true;
+  }
+  return false;
 }
