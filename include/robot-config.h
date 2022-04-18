@@ -1,7 +1,18 @@
 using namespace vex;
-
 extern brain Brain;
-
+extern motor FrontL;
+extern motor BackL;
+extern motor MiddleL;
+extern motor FrontR;
+extern motor MiddleR;
+extern motor BackR;
+extern motor_group leftDrive;
+extern motor_group rightDrive;
+extern inertial inert;
+extern rotation rotate;
+extern limit beam1;
+extern limit beam2;
+extern limit beam3;
 /**
  * Used to initialize code/tasks/devices added using tools in VEXcode Pro.
  *
