@@ -111,7 +111,7 @@ int main() {
 
   // Prevent main from exiting with an infinite loop.
   int current_page = 1;
-  int autoSelect = 3;
+  int autoSelect = 0;
 
   int paramSpeed = 40;
   int paramDist = 800;
@@ -119,10 +119,10 @@ int main() {
   // Print start up screen
   print_page(current_page, autoSelect, paramSpeed, paramDist);
   Brain.Timer.reset();
-vex::brain::sdcard SDcard;//sdcard initialization for file io
-    //TryToDrawImageFile(0,0,&Brain, &SDcard,"coord.png");
-    TryToDrawImageFile(0,0,&Brain, &SDcard,"info.png");
-    vex::wait(1, msec);
+  
+  vex::brain::sdcard SDcard;//sdcard initialization for file io
+  TryToDrawImageFile(0,0,&Brain, &SDcard,"info.png");
+  vex::wait(1, msec);
 
 
   while (true) {
@@ -188,19 +188,23 @@ vex::brain::sdcard SDcard;//sdcard initialization for file io
         if((xPress >= 320 && xPress <= 380) && (yPress >= 65 && yPress <= 115))
         {
           paramSpeed -= 10;
+          print_page(current_page, autoSelect, paramSpeed, paramDist);
         }
         else if((xPress >= 380 && xPress <= 440) && (yPress >= 65 && yPress <= 115))
         {
           paramSpeed += 10;
+          print_page(current_page, autoSelect, paramSpeed, paramDist);
         }
 
         if((xPress >= 320 && xPress <= 380) && (yPress >= 145 && yPress <= 195))
         {
           paramDist -= 100;
+          print_page(current_page, autoSelect, paramSpeed, paramDist);
         }
         else if((xPress >= 380 && xPress <= 440) && (yPress >= 145 && yPress <= 195))
         {
           paramDist += 100;
+          print_page(current_page, autoSelect, paramSpeed, paramDist);
         }
 
         if((xPress >= 35 && xPress <= 159) && (yPress >= 45 && yPress <= 110)){
@@ -209,22 +213,26 @@ vex::brain::sdcard SDcard;//sdcard initialization for file io
           if(testAuto)
           {
             print_page(current_page, autoSelect, paramSpeed, paramDist);
+            moveForward(paramDist, paramSpeed);
           }
         }
-        else if((xPress >= 35 && xPress <= 159) && (yPress >= 135 && yPress <= 200)){
+        else if((xPress >= 35 && xPress <= 159) && (yPress >= 155 && yPress <= 220)){
           autoSelect = 2; //Turn Left
           print_page(current_page, autoSelect, paramSpeed, paramDist);
+          turnLeft(paramDist, paramSpeed);
         }
         else if((xPress >= 179 && xPress <= 303) && (yPress >= 45 && yPress <= 110)){
           autoSelect = 3; //Backward
           print_page(current_page, autoSelect, paramSpeed, paramDist);
+          moveBackward(paramDist, paramSpeed);
         }
-        else if((xPress >= 179 && xPress <= 303) && (yPress >= 135 && yPress <= 200)){
+        else if((xPress >= 179 && xPress <= 303) && (yPress >= 155 && yPress <= 220)){
           autoSelect = 4; //Turn Right
           testAuto = autonSel(autoSelect);
           if(testAuto)
           {
             print_page(current_page, autoSelect, paramSpeed, paramDist);
+            turnRight(paramDist, paramSpeed);
           }
         }
         
