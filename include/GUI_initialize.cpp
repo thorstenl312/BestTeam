@@ -4,7 +4,7 @@
 
 //Movement functions
 void moveForward(int pos, int speed){
-  if(pos < 2000 && pos > 200 && speed < 100 && speed > 10){
+  if(pos < 2000 && pos > 200 && speed <= 100 && speed >= 10){
     leftDrive.rotateFor(pos, deg, speed, velocityUnits::pct, false);
     rightDrive.rotateFor(pos, deg, speed, velocityUnits::pct, true);
     
@@ -12,7 +12,7 @@ void moveForward(int pos, int speed){
   
 }
 void moveBackward(int pos, int speed){
-  if(pos < 2000 && pos > 200 && speed < 100 && speed > 10){
+  if(pos < 2000 && pos > 200 && speed <= 100 && speed >= 10){
     leftDrive.rotateFor(-pos, deg, speed, velocityUnits::pct, false);
     rightDrive.rotateFor(-pos, deg, speed, velocityUnits::pct, true);
     
@@ -20,7 +20,7 @@ void moveBackward(int pos, int speed){
   
 }
 void turnLeft(int pos, int speed){
-  if(pos < 2000 && pos > 200 && speed < 100 && speed > 10){
+  if(pos < 2000 && pos > 200 && speed <= 100 && speed >= 10){
     leftDrive.rotateFor(-pos, deg, speed, velocityUnits::pct, false);
     rightDrive.rotateFor(pos, deg, speed, velocityUnits::pct, true);
     
@@ -28,7 +28,7 @@ void turnLeft(int pos, int speed){
   
 }
 void turnRight(int pos, int speed){
-  if(pos < 2000 && pos > 200 && speed < 100 && speed > 10){
+  if(pos < 2000 && pos > 200 && speed <= 100 && speed >= 10){
     leftDrive.rotateFor(pos, deg, speed, velocityUnits::pct, false);
     rightDrive.rotateFor(-pos, deg, speed, velocityUnits::pct, true);
 
@@ -121,17 +121,20 @@ void print_page(int page, int autoSelect, int paramSpeed, int paramDist){
     Brain.Screen.setFillColor(transparent);
     Brain.Screen.printAt(260,25, "Test Runs"); //button print
     Brain.Screen.printAt(380,25, "Controls"); //button print
+    Brain.Screen.setFillColor(black); Brain.Screen.drawRectangle(149, 112, 40, 40);
 
     // print auto buttons
     //Forward
-    if(autoSelect == 1){
-      Brain.Screen.setFillColor(green); Brain.Screen.drawRectangle(35, 45, 124, 65);
-      Brain.Screen.setFillColor(blue); Brain.Screen.drawRectangle(35, 135, 124, 65);
+    if(autoSelect == 0){
+      Brain.Screen.setFillColor(yellow); Brain.Screen.drawRectangle(35, 45, 124, 65);
+      Brain.Screen.setFillColor(blue); Brain.Screen.drawRectangle(35, 155, 124, 65);
       Brain.Screen.setFillColor(red); Brain.Screen.drawRectangle(179, 45, 124, 65);
-      Brain.Screen.setFillColor(purple); Brain.Screen.drawRectangle(179, 135, 124, 65);
+      Brain.Screen.setFillColor(purple); Brain.Screen.drawRectangle(179, 155, 124, 65);
 
       Brain.Screen.setFillColor(orange); Brain.Screen.drawRectangle(320, 65, 120, 50);
       Brain.Screen.setFillColor(orange); Brain.Screen.drawRectangle(320, 145, 120, 50);
+
+      //Brain.Screen.setFillColor(yellow); Brain.Screen.drawRectangle(149, 112, 40, 40);
       
       Brain.Screen.setFillColor(orange);
 
@@ -145,20 +148,51 @@ void print_page(int page, int autoSelect, int paramSpeed, int paramDist){
       Brain.Screen.print("+");
 
 
-      moveForward(paramDist, paramSpeed);
+      //moveForward(paramDist, paramSpeed);
       Brain.Screen.setFillColor(transparent);
       Brain.Screen.setCursor(3, 33);
       Brain.Screen.print("Speed: %d", paramSpeed);
       Brain.Screen.setCursor(7, 33);
       Brain.Screen.print("Distance: %d", paramDist);
+    }
+    if(autoSelect == 1){
+      Brain.Screen.setFillColor(green); Brain.Screen.drawRectangle(35, 45, 124, 65);
+      Brain.Screen.setFillColor(blue); Brain.Screen.drawRectangle(35, 155, 124, 65);
+      Brain.Screen.setFillColor(red); Brain.Screen.drawRectangle(179, 45, 124, 65);
+      Brain.Screen.setFillColor(purple); Brain.Screen.drawRectangle(179, 155, 124, 65);
+
+      Brain.Screen.setFillColor(orange); Brain.Screen.drawRectangle(320, 65, 120, 50);
+      Brain.Screen.setFillColor(orange); Brain.Screen.drawRectangle(320, 145, 120, 50);
+
+      //Brain.Screen.setFillColor(yellow); Brain.Screen.drawRectangle(149, 112, 40, 40);
+      
+      Brain.Screen.setFillColor(orange);
+
+      Brain.Screen.setCursor(5, 35);
+      Brain.Screen.print("-");
+      Brain.Screen.setCursor(5, 41);
+      Brain.Screen.print("+");
+      Brain.Screen.setCursor(9, 35);
+      Brain.Screen.print("-");
+      Brain.Screen.setCursor(9, 41);
+      Brain.Screen.print("+");
+
+
+      //moveForward(paramDist, paramSpeed);
+      Brain.Screen.setFillColor(transparent);
+      Brain.Screen.setCursor(3, 33);
+      Brain.Screen.print("Speed: %d", paramSpeed);
+      Brain.Screen.setCursor(7, 33);
+      Brain.Screen.print("Distance: %d", paramDist);
+      
     }
 
     //Turn Left
     else if(autoSelect == 2){
       Brain.Screen.setFillColor(yellow); Brain.Screen.drawRectangle(35, 45, 124, 65);
-      Brain.Screen.setFillColor(green); Brain.Screen.drawRectangle(35, 135, 124, 65);
+      Brain.Screen.setFillColor(green); Brain.Screen.drawRectangle(35, 155, 124, 65);
       Brain.Screen.setFillColor(red); Brain.Screen.drawRectangle(179, 45, 124, 65);
-      Brain.Screen.setFillColor(purple); Brain.Screen.drawRectangle(179, 135, 124, 65);
+      Brain.Screen.setFillColor(purple); Brain.Screen.drawRectangle(179, 155, 124, 65);
       
       Brain.Screen.setFillColor(orange); Brain.Screen.drawRectangle(320, 65, 120, 50);
       Brain.Screen.setFillColor(orange); Brain.Screen.drawRectangle(320, 145, 120, 50);
@@ -177,19 +211,20 @@ void print_page(int page, int autoSelect, int paramSpeed, int paramDist){
 
       Brain.Screen.setFillColor(transparent);
 
-      turnLeft(paramDist, paramSpeed);
+      //turnLeft(paramDist, paramSpeed);
       Brain.Screen.setCursor(3, 33);
-      Brain.Screen.print("Speed: %d", 0);
+      Brain.Screen.print("Speed: %d", paramSpeed);
       Brain.Screen.setCursor(7, 33);
-      Brain.Screen.print("Distance: %d", 0);
+      Brain.Screen.print("Distance: %d", paramDist);
+      
     }
 
     //Backward
     else if(autoSelect == 3){
       Brain.Screen.setFillColor(yellow); Brain.Screen.drawRectangle(35, 45, 124, 65);
-      Brain.Screen.setFillColor(blue); Brain.Screen.drawRectangle(35, 135, 124, 65);
+      Brain.Screen.setFillColor(blue); Brain.Screen.drawRectangle(35, 155, 124, 65);
       Brain.Screen.setFillColor(green); Brain.Screen.drawRectangle(179, 45, 124, 65);
-      Brain.Screen.setFillColor(purple); Brain.Screen.drawRectangle(179, 135, 124, 65);
+      Brain.Screen.setFillColor(purple); Brain.Screen.drawRectangle(179, 155, 124, 65);
       
       Brain.Screen.setFillColor(orange); Brain.Screen.drawRectangle(320, 65, 120, 50);
       Brain.Screen.setFillColor(orange); Brain.Screen.drawRectangle(320, 145, 120, 50);
@@ -208,19 +243,20 @@ void print_page(int page, int autoSelect, int paramSpeed, int paramDist){
 
       Brain.Screen.setFillColor(transparent);
       
-      moveBackward(paramDist,paramSpeed);
+      //moveBackward(paramDist,paramSpeed);
       Brain.Screen.setCursor(3, 33);
       Brain.Screen.print("Speed: %d", paramSpeed);
       Brain.Screen.setCursor(7, 33);
       Brain.Screen.print("Distance: %d", paramDist);
+      
     }
 
     //Turn Right
     else if(autoSelect == 4){
       Brain.Screen.setFillColor(yellow); Brain.Screen.drawRectangle(35, 45, 124, 65);
-      Brain.Screen.setFillColor(blue); Brain.Screen.drawRectangle(35, 135, 124, 65);
+      Brain.Screen.setFillColor(blue); Brain.Screen.drawRectangle(35, 155, 124, 65);
       Brain.Screen.setFillColor(red); Brain.Screen.drawRectangle(179, 45, 124, 65);
-      Brain.Screen.setFillColor(green); Brain.Screen.drawRectangle(179, 135, 124, 65);
+      Brain.Screen.setFillColor(green); Brain.Screen.drawRectangle(179, 155, 124, 65);
       
       Brain.Screen.setFillColor(orange); Brain.Screen.drawRectangle(320, 65, 120, 50);
       Brain.Screen.setFillColor(orange); Brain.Screen.drawRectangle(320, 145, 120, 50);
@@ -238,15 +274,21 @@ void print_page(int page, int autoSelect, int paramSpeed, int paramDist){
       
       Brain.Screen.setFillColor(transparent);
 
-      turnRight(paramDist,paramSpeed);
+      //turnRight(paramDist,paramSpeed);
       Brain.Screen.setCursor(3, 33);
-      Brain.Screen.print("Speed: %d", 0);
+      Brain.Screen.print("Speed: %d", paramSpeed);
       Brain.Screen.setCursor(7, 33);
-      Brain.Screen.print("Distance: %d", 0);
+      Brain.Screen.print("Distance: %d", paramDist);
+      
+      
     }
     
+    
+      
     Brain.Screen.setFillColor(transparent);
-    Brain.Screen.printAt(60, 80, "Forward"); Brain.Screen.printAt(65, 170, "T-Left"); Brain.Screen.printAt(202, 80, "Backward"); Brain.Screen.printAt(206, 170, "T-Right");
+    Brain.Screen.printAt(60, 80, "Forward"); Brain.Screen.printAt(65, 190, "T-Left"); Brain.Screen.printAt(202, 80, "Backward"); Brain.Screen.printAt(206, 190, "T-Right");
+      vex::wait(2,seconds);
+    Brain.Screen.setFillColor(green); Brain.Screen.drawRectangle(149, 112, 40, 40); 
   }
 
   //Test Run Page
@@ -289,8 +331,6 @@ void print_page(int page, int autoSelect, int paramSpeed, int paramDist){
     Brain.Screen.setCursor(4, 4);
     Brain.Screen.print("Speed:");
     Brain.Screen.setCursor(5, 4);
-    Brain.Screen.print("Traverse:");
-    Brain.Screen.setCursor(6, 4);
     Brain.Screen.print("Distance:");
     Brain.Screen.setCursor(11, 4);
     Brain.Screen.print("Battery lvl: %d%s", Brain.Battery.capacity(pct), "%%");
@@ -307,10 +347,8 @@ void print_page(int page, int autoSelect, int paramSpeed, int paramDist){
 
     moveForward(defaultDistance, defaultSpeed);
     Brain.Screen.setCursor(4, 4);
-    Brain.Screen.print("Speed: %d units/s", defaultSpeed);
+    Brain.Screen.print("Speed: %d%s", defaultSpeed, "%");
     Brain.Screen.setCursor(5, 4);
-    Brain.Screen.print("Traverse: %d degrees", 0);
-    Brain.Screen.setCursor(6, 4);
     Brain.Screen.print("Distance: %d units", defaultDistance);
     Brain.Screen.setCursor(11, 4);
     Brain.Screen.print("Battery lvl: %d%s", Brain.Battery.capacity(pct), "%");
@@ -327,11 +365,9 @@ void print_page(int page, int autoSelect, int paramSpeed, int paramDist){
 
     turnLeft(defaultDistance, defaultSpeed);
     Brain.Screen.setCursor(4, 4);
-    Brain.Screen.print("Speed: %d units/s", 0);
+    Brain.Screen.print("Speed: %d%s", defaultSpeed, "%");
     Brain.Screen.setCursor(5, 4);
-    Brain.Screen.print("Traverse: %d degrees", -15);
-    Brain.Screen.setCursor(6, 4);
-    Brain.Screen.print("Distance: %d units", 0);
+    Brain.Screen.print("Distance: %d units", defaultDistance);
     Brain.Screen.setCursor(11, 4);
     Brain.Screen.print("Battery lvl: %d%s", Brain.Battery.capacity(pct), "%");
     }
@@ -347,11 +383,9 @@ void print_page(int page, int autoSelect, int paramSpeed, int paramDist){
 
     turnRight(defaultDistance, defaultSpeed);
     Brain.Screen.setCursor(4, 4);
-    Brain.Screen.print("Speed: %d units/s", 0);
+    Brain.Screen.print("Speed: %d%s", defaultSpeed, "%");
     Brain.Screen.setCursor(5, 4);
-    Brain.Screen.print("Traverse: %d degrees", 15);
-    Brain.Screen.setCursor(6, 4);
-    Brain.Screen.print("Distance: %d units", 0);
+    Brain.Screen.print("Distance: %d units", defaultDistance);
     Brain.Screen.setCursor(11, 4);
     Brain.Screen.print("Battery lvl: %d%s", Brain.Battery.capacity(pct), "%");
     }
@@ -367,10 +401,8 @@ void print_page(int page, int autoSelect, int paramSpeed, int paramDist){
 
     moveBackward(defaultDistance, defaultSpeed);
     Brain.Screen.setCursor(4, 4);
-    Brain.Screen.print("Speed: %d units/s", defaultSpeed);
+    Brain.Screen.print("Speed: %d%s", defaultSpeed, "%");
     Brain.Screen.setCursor(5, 4);
-    Brain.Screen.print("Traverse: %d degrees", 0);
-    Brain.Screen.setCursor(6, 4);
     Brain.Screen.print("Distance: %d units", defaultDistance);
     Brain.Screen.setCursor(11, 4);
     Brain.Screen.print("Battery lvl: %d%s", Brain.Battery.capacity(pct), "%");
