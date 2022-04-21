@@ -1,23 +1,36 @@
 GitHub to RCS: https://github.com/thorstenl312/BestTeam
 1. Download the file onto your computer and unzip the file.
-2. Open VexCode Pro and open the .v5code file.
-3. On the left side, right click include and press import files. Select all the files in the 
+2. Download VexCodeProV5.
+3. Open VexCodeProV5 and open the .v5code file.
+4. On the left side, right click include and press import files. Select all the files in the 
    include folder and press Open. Say No to any popups that may appear.
 
 
 Building and Downloading Vex Project to a Robot:
 1. Run the VexCodeProV5 and select the project desired.
-2. To build, press the button in the top right and the expected output should show at the bottom
+2. To build, press the button in the top right and the expected output should show at the bottom.
+   There will be a message if the build was successful.
 3. To download code, make sure the brain is plugged in straight to the computer. Verify that the
    connection is stable by the green brain symbol that shows up at the top right. Press the download 
    button to the right and wait until the output shows Download Completed.
 
 
 Movement Function Definitions:
-
 1. Movement function declarations with default values of 800 motor degrees and 40 percent speed.
 2. To use the movement functions, call moveForward(pos, speed), moveBackward(pos, speed),
    turnLeft(pos, speed), turnRight(pos, speed). The parameter pos is the desired motor degrees and 
    must be between 200 and 2000 degrees (not inclusive). The second parameter, speed, is the percent 
    speed the motor moves at and must be between the values 10 and 100 (not inclusive).
+
+
+GUI Usage:
+a) Interact with the Robot Control Studio by pressing the screen on the vex brain.
+1. Use the Vitals tab to view information about the robot as it runs through the routine. Critical data,
+   such as temperature checks, is stored in the vitals tab. 
+2. Use the Auton Select tab to access the four movement routines. On the right side are buttons for
+   incrementing speed and distance. Pressing on the + or - buttons will adjust the values accordingly.
+3. The Test Run tab stores information about the robot after the routine has completed.
+4. The Controls tab contains buttons that correspond to the movement functions. The top button moves
+   the robot forwards, the left button turns the robot left, the right button turns the robot right,
+   and the bottom button moves the robot backwards.
 
